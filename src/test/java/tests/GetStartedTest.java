@@ -24,5 +24,7 @@ public class GetStartedTest extends CoreTestCase {
 
     welcomePageObject.waitForLearnMoreAboutDataCollectedLink();
     welcomePageObject.clickGetStartedtButton();
+
+    System.out.println("Well done! The testPassThroughWelcome has been passed successfully!");
   }
 }
