@@ -2,6 +2,7 @@ package lib.ui;
 
 import io.appium.java_client.AppiumDriver;
 import lib.Platform;
+import org.openqa.selenium.remote.RemoteWebDriver;
 
 abstract public class MyListPageObject extends MainPageObject {
 
@@ -9,7 +10,7 @@ abstract public class MyListPageObject extends MainPageObject {
           FOLDER_BY_NAME_TMP,
           ARTICLE_BY_TITLE_TMP;//Java (programming language)
 
-  public MyListPageObject(AppiumDriver driver) {
+  public MyListPageObject(RemoteWebDriver driver) {
     super(driver);
   }
 
