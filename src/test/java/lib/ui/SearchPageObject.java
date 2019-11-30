@@ -42,7 +42,7 @@ abstract public class SearchPageObject extends MainPageObject{
         this.waitForElementNotPresent(SEARCH_CANCEL_BUTTON,"Search cancel button is still present",5);
     }
     public void clickCancelSearch(){//4_04_video
-        this.waitForElementAndClick(SEARCH_CANCEL_BUTTON,"Cannot find and click search cancel button",5);
+        this.waitForElementAndClick(SEARCH_CANCEL_BUTTON,"Cannot find and click search cancel button",10);
     }
     public void clickArticleBySubstring(String substring){//4_05_video
         String searchResultXpath = getResultSearchElement(substring);

@@ -19,12 +19,12 @@ public class ChangeAppConditionTests extends CoreTestCase {
 
         String titleBeforeRotation = articlePageObject.getArticleTitle();
         this.rotateScreenLandscape();
-        System.out.println("Screen orientation is " + driver.getOrientation().toString());
+        //System.out.println("Screen orientation is " + driver.getOrientation().toString());
 
         String titleAfterRotation = articlePageObject.getArticleTitle();
         assertEquals("Article title has been exchange after rotation", titleBeforeRotation, titleAfterRotation);
         this.rotateScreenPortrait();
-        System.out.println("Screen orientation is " + driver.getOrientation().toString());
+        //System.out.println("Screen orientation is " + driver.getOrientation().toString());
 
         String titleAfterSecondRotation = articlePageObject.getArticleTitle();
         assertEquals("Article title has been exchange after second rotation", titleAfterRotation, titleAfterSecondRotation);

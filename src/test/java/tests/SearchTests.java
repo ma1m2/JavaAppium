@@ -22,7 +22,7 @@ public class SearchTests extends CoreTestCase {
 
     searchPageObject.initSearchInput();
     searchPageObject.typeSearchLine("Java");
-    searchPageObject.waitForSearchResult("Object-oriented programming language");
+    searchPageObject.waitForSearchResult("bject-oriented programming language");
 
     System.out.println("Well done! The testSearchByXpath has been passed successfully!");
   }

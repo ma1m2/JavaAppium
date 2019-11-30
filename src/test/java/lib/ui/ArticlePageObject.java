@@ -33,16 +33,20 @@ abstract public class ArticlePageObject extends MainPageObject {
     WebElement element = waitForTitleElement();
     if (Platform.getInstance().isAndroid()) {
       return element.getAttribute("text");
-    } else {
+    } else if(Platform.getInstance().isIOS()){
       return element.getAttribute("name");
+    } else {
+      return element.getText();
     }
   }
 
   public void swipeToFooter() {
     if (Platform.getInstance().isAndroid()) {
       this.swipeUpToFindElement(FOOTER_ELEMENT, "Cannot find the end of article", 40);
-    } else {
+    } else if(Platform.getInstance().isIOS()){
       this.swipeUpTillElementAppear(FOOTER_ELEMENT, "Cannot find the end of article", 40);
+    }else {
+      this.scrollWebPageTillElementNotVisible(FOOTER_ELEMENT, "Cannot find the end of article on webpage",40);
     }
   }
 
