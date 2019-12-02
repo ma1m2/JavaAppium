@@ -2,10 +2,7 @@ package tests;
 
 import lib.CoreTestCase;
 import lib.Platform;
-import lib.ui.ArticlePageObject;
-import lib.ui.MyListPageObject;
-import lib.ui.NavigationUI;
-import lib.ui.SearchPageObject;
+import lib.ui.*;
 import lib.ui.factories.ArticlePageObjectFactory;
 import lib.ui.factories.MyListPageObjectFactory;
 import lib.ui.factories.NavigationUIFactory;
@@ -13,7 +10,9 @@ import lib.ui.factories.SearchPageObjectFactory;
 import org.junit.Test;
 
 public class MyListsTests extends CoreTestCase {
-  private static final String nameOfFolder = "Learning programming";
+  private static final String NAME_OF_FOLDER = "Learning programming";
+  private static final String LOGIN = "Sveta 2607";
+  private static final String PASSWORD = "W1234asdf#";
 
   @Test//3_03; 4_06
   public void testSaveArticleToMyList() {
@@ -28,18 +27,29 @@ public class MyListsTests extends CoreTestCase {
     String articleTitle = articlePageObject.getArticleTitle();
 
     if (Platform.getInstance().isAndroid()) {
-      articlePageObject.addArticleToMyList(nameOfFolder);
+      articlePageObject.addArticleToMyList(NAME_OF_FOLDER);
     } else {
+      articlePageObject.addArticleToMySaved();
+    }
+    if(Platform.getInstance().isMW()){
+      AuthorizationPageObject auth = new AuthorizationPageObject(driver);
+      auth.clickAuthButton();
+      auth.enterLoginData(LOGIN, PASSWORD);
+      auth.submitForm();
+
+      articlePageObject.waitForTitleElement();
+      assertEquals("We are not on the same page after login", articleTitle, articlePageObject.getArticleTitle());
       articlePageObject.addArticleToMySaved();
     }
     articlePageObject.closeArticle();
 
     NavigationUI navigationUI = NavigationUIFactory.get(driver);
+    navigationUI.openNavigation();
     navigationUI.clickMyLists();
 
     MyListPageObject myListPageObject = MyListPageObjectFactory.get(driver);
     if (Platform.getInstance().isAndroid()) {
-      myListPageObject.openFolderByName(nameOfFolder);
+      myListPageObject.openFolderByName(NAME_OF_FOLDER);
     }
 
     myListPageObject.removeOverlay();
@@ -60,7 +70,7 @@ public class MyListsTests extends CoreTestCase {
     String articleTitle1 = articlePageObject.getArticleTitle();
 
     if (Platform.getInstance().isAndroid()) {
-      articlePageObject.addArticleToMyList(nameOfFolder);
+      articlePageObject.addArticleToMyList(NAME_OF_FOLDER);
     } else {
       articlePageObject.addArticleToMySaved();
     }
@@ -79,7 +89,7 @@ public class MyListsTests extends CoreTestCase {
     String articleTitle2 = "Java (software platform)";
     if (Platform.getInstance().isAndroid()) {
       articlePageObject.addSecondArticleToMyList();
-      myListPageObject.clickFolderByName(nameOfFolder);
+      myListPageObject.clickFolderByName(NAME_OF_FOLDER);
     } else {
       articlePageObject.addArticleToMySaved();
     }
@@ -88,7 +98,7 @@ public class MyListsTests extends CoreTestCase {
     NavigationUI navigationUI = NavigationUIFactory.get(driver);
     navigationUI.clickMyLists();
     if (Platform.getInstance().isAndroid()) {
-      myListPageObject.openFolderByName(nameOfFolder); //work sometimes
+      myListPageObject.openFolderByName(NAME_OF_FOLDER); //work sometimes
       //myListPageOb.openFolderByImageID(); always work
     }
 

@@ -26,50 +26,49 @@ public class CoreTestCase extends TestCase {
   }
 
   protected void rotateScreenPortrait() {
-    if(driver instanceof AppiumDriver){
+    if (driver instanceof AppiumDriver) {
       AppiumDriver driver = (AppiumDriver) this.driver;
       driver.rotate(ScreenOrientation.PORTRAIT);
-    }else {
+    } else {
       System.out.println("Method rotateScreenPortrait does nothing for this platform: "
               + Platform.getInstance().getPlatformVar());
     }
   }
 
   protected void rotateScreenLandscape() {
-    if(driver instanceof AppiumDriver) {
+    if (driver instanceof AppiumDriver) {
       AppiumDriver driver = (AppiumDriver) this.driver;
       driver.rotate(ScreenOrientation.LANDSCAPE);
-    }else {
+    } else {
       System.out.println("Method rotateScreenLandscape does nothing for this platform: "
               + Platform.getInstance().getPlatformVar());
     }
   }
 
   protected void backgroundApp(int seconds) {
-    if(driver instanceof AppiumDriver) {
+    if (driver instanceof AppiumDriver) {
       AppiumDriver driver = (AppiumDriver) this.driver;
       driver.runAppInBackground(seconds);
-    }else {
+    } else {
       System.out.println("Method backgroundApp does nothing for this platform: "
               + Platform.getInstance().getPlatformVar());
     }
   }
 
-  protected void openWikiWebPageForMobileWeb(){
-    if(Platform.getInstance().isMV()){
+  protected void openWikiWebPageForMobileWeb() {
+    if (Platform.getInstance().isMW()) {
       driver.get("https://en.m.wikipedia.org");
-    }else {
+    } else {
       System.out.println("Method openWikiWebPageForMobileWeb does nothing for this platform: "
               + Platform.getInstance().getPlatformVar());
     }
   }
 
-  private void skipWelcomForPageIOSApp(){
-    if(Platform.getInstance().isIOS()){
+  private void skipWelcomForPageIOSApp() {
+    if (Platform.getInstance().isIOS()) {
       AppiumDriver driver = (AppiumDriver) this.driver;
       WelcomePageObject welcomePageObject = new WelcomePageObject(driver);
       welcomePageObject.clickSkip();
     }
   }
-
 }

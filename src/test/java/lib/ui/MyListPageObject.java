@@ -8,6 +8,7 @@ abstract public class MyListPageObject extends MainPageObject {
 
   protected static String
           FOLDER_BY_NAME_TMP,
+          REMOVED_FROM_SAVED_BUTTON,
           ARTICLE_BY_TITLE_TMP;//Java (programming language)
 
   public MyListPageObject(RemoteWebDriver driver) {
@@ -21,6 +22,9 @@ abstract public class MyListPageObject extends MainPageObject {
 
   public String getArticleTitleByXpath(String articleTitle) {
     return ARTICLE_BY_TITLE_TMP.replace("{TITLE}", articleTitle);
+  }
+  public String getRemoveButtonByTitle(String articleTitle) {
+    return REMOVED_FROM_SAVED_BUTTON.replace("{TITLE}", articleTitle);
   }
   /*TEMPLATES*/
 
@@ -58,12 +62,20 @@ abstract public class MyListPageObject extends MainPageObject {
   public void swipeArticleToDelete(String articleTitle) {
     String articleXpath = getArticleTitleByXpath(articleTitle);
     this.waitForArticleToAppearByTitle(articleTitle);
-    this.swipeElementToLeft(
-            articleXpath,//"//*[@text='Java (programming language)']"
-            "Cannot find saved article " + articleTitle
-    );
+    if(Platform.getInstance().isIOS() || Platform.getInstance().isAndroid()){
+      this.swipeElementToLeft(
+              articleXpath,//"//*[@text='Java (programming language)']"
+              "Cannot find saved article " + articleTitle
+      );
+    }else {
+      String removeLocator = getRemoveButtonByTitle(articleTitle);
+      this.waitForElementAndClick(removeLocator,"Cannot click button to remove article",10);
+    }
     if(Platform.getInstance().isIOS()){
         this.clickElementToTheRightUpperCorner(articleXpath,"Cannot find Red Bin");
+    }
+    if(Platform.getInstance().isMW()){
+      driver.navigate().refresh();
     }
     this.waitForArticleToDisappearByTitle(articleTitle);
   }

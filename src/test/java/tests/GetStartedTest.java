@@ -7,10 +7,13 @@ import org.junit.Test;
 
 public class GetStartedTest extends CoreTestCase {
   @Test
-  public void testPassThroughWelcome(){
-    if(Platform.getInstance().isAndroid()){
+  //@EnabledIfEnvironmentVariable(named="PLATFORM", matches="mob_web") - JUnit 5
+  public void testPassThroughWelcome() {
+
+    if (Platform.getInstance().isAndroid() || Platform.getInstance().isMW()) {
       return;
     }
+
     WelcomePageObject welcomePageObject = new WelcomePageObject(driver);
 
     welcomePageObject.waitForLearnMoreLink();

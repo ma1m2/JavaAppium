@@ -3,7 +3,7 @@ package lib.ui.mobile_web;
 import lib.ui.SearchPageObject;
 import org.openqa.selenium.remote.RemoteWebDriver;
 
-public class MVSearchPageObject extends SearchPageObject {
+public class MWSearchPageObject extends SearchPageObject {
   static {
     SEARCH_INIT_ELEMENT = "css:button#searchIcon";
     SEARCH_INPUT = "css:form>input[type='search']";
@@ -17,7 +17,7 @@ public class MVSearchPageObject extends SearchPageObject {
     SEARCH_EMPTY_RESULT_ELEMENT = "css:p.without-results";
   }
 
-  public MVSearchPageObject(RemoteWebDriver driver) {
+  public MWSearchPageObject(RemoteWebDriver driver) {
     super(driver);
   }
 }

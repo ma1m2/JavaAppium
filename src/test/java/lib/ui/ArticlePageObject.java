@@ -1,8 +1,6 @@
 package lib.ui;
 
-import io.appium.java_client.AppiumDriver;
 import lib.Platform;
-import lib.ui.factories.MyListPageObjectFactory;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.remote.RemoteWebDriver;
 
@@ -13,6 +11,7 @@ abstract public class ArticlePageObject extends MainPageObject {
           FOOTER_ELEMENT,
           OPTION_BUTTON,
           OPTION_ADD_TO_MY_LIST_BUTTON,
+          OPTION_REMOVE_FROM_MY_LIST_BUTTON,
           ADD_TO_MY_LIST_OVERLAY,
           MY_LIST_INPUT,
           MY_LIST_OK_BUTTON,
@@ -84,14 +83,31 @@ abstract public class ArticlePageObject extends MainPageObject {
     );
   }
   public void addArticleToMySaved(){
+    if(Platform.getInstance().isMW()){
+      this.removeArtcleFromSavedIfItAdded();
+    }
     this.waitForElementAndClick(OPTION_ADD_TO_MY_LIST_BUTTON,"Cannot find option to add article to reading list",5);
   }
+
+  public void removeArtcleFromSavedIfItAdded(){
+    if(this.isElementPresent(OPTION_REMOVE_FROM_MY_LIST_BUTTON)){
+      this.waitForElementAndClick(OPTION_REMOVE_FROM_MY_LIST_BUTTON,
+              "Cannot click button to remove article from saved",1);
+      this.waitForElementPresent(OPTION_ADD_TO_MY_LIST_BUTTON,
+              "Cannot find button to add list articl after removing it before",5);
+    }
+  }
+
   public void closeArticle() {
-    this.waitForElementAndClick(
-            CLOSE_ARTICLE_BUTTON,//"//android.widget.ImageButton[@content-desc='Navigate up']"
-            "Cannot close article, cannot find X-link",
-            5
-    );
+    if(Platform.getInstance().isIOS() || Platform.getInstance().isAndroid()){
+      this.waitForElementAndClick(
+              CLOSE_ARTICLE_BUTTON,//"//android.widget.ImageButton[@content-desc='Navigate up']"
+              "Cannot close article, cannot find X-link",
+              5
+      );
+    }else {
+      System.out.println("Method closeArticle() do nothing for this Platform: " + Platform.getInstance().isMW());
+    }
   }
   public void addSecondArticleToMyList() {
     this.waitForElementAndClick(

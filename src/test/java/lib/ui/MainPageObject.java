@@ -86,7 +86,7 @@ public class MainPageObject {
   }
 
   public void scrollWebPageUp() {
-    if (Platform.getInstance().isMV()) {
+    if (Platform.getInstance().isMW()) {
       JavascriptExecutor jsExecutor = (JavascriptExecutor) driver;
       jsExecutor.executeScript("window.scrollBy(0, 250)");
     } else {
@@ -131,7 +131,7 @@ public class MainPageObject {
   public boolean isElementLocatedOnTheScreen(String locator) {//for iOS 6_04
     int elementLocationByY = this.waitForElementPresent(locator, "Cannot find element by locator '" + locator + "'", 1)
             .getLocation().getY();
-    if (Platform.getInstance().isMV()) {
+    if (Platform.getInstance().isMW()) {
       JavascriptExecutor jsExecutor = (JavascriptExecutor) driver;
       Object jsResult = jsExecutor.executeScript("return window.pageYOffset");//js.executeScript("return document.domain;").toString();
       elementLocationByY -= Integer.parseInt(jsResult.toString());
@@ -189,6 +189,26 @@ public class MainPageObject {
     By by = this.getLocatorByString(locator);
     List elements = driver.findElements(by);
     return elements.size();
+  }
+
+  public void tryClickElementWithFewAttempts(String locator, String errorMessage, int amountOfAttempts){
+    int currentAttempts = 0;
+    boolean needMoreAttempts = true;
+    while (needMoreAttempts){
+      try{
+        this.waitForElementAndClick(locator,errorMessage,1);
+        needMoreAttempts = false;
+      }catch (Exception e){
+        if(currentAttempts>amountOfAttempts){
+          this.waitForElementAndClick(locator,errorMessage,1);
+        }
+        ++currentAttempts;
+      }
+    }
+  }
+
+  public boolean isElementPresent(String locator){
+    return this.getAmountOfElements(locator)>0;
   }
 
   public void assertElementNotPresent(String locator, String errorMessage) {

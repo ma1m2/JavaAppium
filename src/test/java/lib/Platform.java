@@ -1,6 +1,5 @@
 package lib;
 
-import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.ios.IOSDriver;
 import org.apache.commons.collections.map.HashedMap;
@@ -19,9 +18,12 @@ public class Platform {
   private static final String APPIUM_URL = "http://127.0.0.1:4723/wd/hub";
 
   private static Platform instance;
-  private Platform() {}
-  public static Platform getInstance(){
-    if(instance==null){
+
+  private Platform() {
+  }
+
+  public static Platform getInstance() {
+    if (instance == null) {
       instance = new Platform();
     }
     return instance;
@@ -29,29 +31,30 @@ public class Platform {
 
   public RemoteWebDriver getDriver() throws Exception {//AppiumDriver
     URL url = new URL(APPIUM_URL);
-    if(this.isAndroid()){
-      return new AndroidDriver(url,this.getAndroidDesiredCapabilities());
-    }else if(this.isIOS()){
-      return new IOSDriver(url,this.getIOSDesiredCapabilities());
-    }else if(this.isMV()){
+    if (this.isAndroid()) {
+      return new AndroidDriver(url, this.getAndroidDesiredCapabilities());
+    } else if (this.isIOS()) {
+      return new IOSDriver(url, this.getIOSDesiredCapabilities());
+    } else if (this.isMW()) {
       return new ChromeDriver(this.getMWChromeOptions());
-    }else {
+    } else {
       throw new Exception("Cannot detect type of driver. Platform value: " + this.getPlatformVar());
     }
   }
 
-  public boolean isAndroid(){
-    return  this.isPlatform(PLATFORM_ANDROID);
-  }
-  public boolean isIOS(){
-    return  this.isPlatform(PLATFORM_IOS);
-  }
-  public boolean isMV(){
-    return  this.isPlatform(PLATFORM_MOBILE_WEB);
+  public boolean isAndroid() {
+    return this.isPlatform(PLATFORM_ANDROID);
   }
 
+  public boolean isIOS() {
+    return this.isPlatform(PLATFORM_IOS);
+  }
 
-  private DesiredCapabilities getAndroidDesiredCapabilities(){
+  public boolean isMW() {
+    return this.isPlatform(PLATFORM_MOBILE_WEB);
+  }
+
+  private DesiredCapabilities getAndroidDesiredCapabilities() {
     DesiredCapabilities capabilities = new DesiredCapabilities();
     capabilities.setCapability("platformName", "Android");
     capabilities.setCapability("deviceName", "AndroidTestDevice");
@@ -63,7 +66,8 @@ public class Platform {
     //"C:\\Users\\x1y1z\\Documents\\GitHub\\avt_mob\\apks\\org.wikipedia.apk");
     return capabilities;
   }
-  private DesiredCapabilities getIOSDesiredCapabilities(){
+
+  private DesiredCapabilities getIOSDesiredCapabilities() {
     DesiredCapabilities capabilities = new DesiredCapabilities();
     capabilities.setCapability("platformName", "iOS");
     capabilities.setCapability("deviceName", "iPhone SE");
@@ -72,13 +76,13 @@ public class Platform {
     return capabilities;
   }
 
-  private ChromeOptions getMWChromeOptions(){
-    Map<String,Object> deviceMetrics = new HashedMap();
+  private ChromeOptions getMWChromeOptions() {
+    Map<String, Object> deviceMetrics = new HashedMap();
     deviceMetrics.put("width", 360);
     deviceMetrics.put("heght", 640);
     deviceMetrics.put("pixelRatio", 3.0);
 
-    Map<String,Object> mobileEmulator = new HashedMap();
+    Map<String, Object> mobileEmulator = new HashedMap();
     mobileEmulator.put("deviceMetrics", deviceMetrics);
     mobileEmulator.put("userAgent",
             "Mozilla/5.0 (Linux; Android 4.2.1; en-us; Nexus 5 Build/JOP40D) AppleWebKit/535.19 (KHTML, like Gecko) Chrome/18.0.1025.166 Mobile Safari/535.19");
@@ -88,11 +92,12 @@ public class Platform {
     return chromeOptions;
   }
 
-  private boolean isPlatform(String myPlatform){
+  private boolean isPlatform(String myPlatform) {
     String platform = this.getPlatformVar();
     return myPlatform.equals(platform);
   }
-  public String getPlatformVar(){
+
+  public String getPlatformVar() {
     return System.getenv("PLATFORM");
   }
 }
