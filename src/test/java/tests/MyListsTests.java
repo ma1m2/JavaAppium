@@ -51,8 +51,13 @@ public class MyListsTests extends CoreTestCase {
     if (Platform.getInstance().isAndroid()) {
       myListPageObject.openFolderByName(NAME_OF_FOLDER);
     }
+    if (Platform.getInstance().isMW()) {
+      driver.navigate().refresh();
+    }
+    if (Platform.getInstance().isIOS()) {
+      myListPageObject.removeOverlay();
+    }
 
-    myListPageObject.removeOverlay();
     myListPageObject.swipeArticleToDelete(articleTitle);
 
     System.out.println("Well done! The testSaveArticleToMyList has been passed successfully!");

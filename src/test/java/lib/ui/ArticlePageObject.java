@@ -9,8 +9,6 @@ abstract public class ArticlePageObject extends MainPageObject {
           TITLE,
           TITLE_2,
           LINK_INSTEAD_OF_TITLE_2,
-          HREF_INSTEAD_OF_SECOND_TITLE,
-          IMAGE_INSTEAD_OF_SECOND_TITLE,
           FOOTER_ELEMENT,
           OPTION_BUTTON,
           OPTION_ADD_TO_MY_LIST_BUTTON,
