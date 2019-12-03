@@ -13,7 +13,7 @@ import java.util.Map;
 
 public class Platform {
   private static final String PLATFORM_IOS = "ios";
-  private static final String PLATFORM_ANDROID = "android";
+  private static final String PLATFORM_ANDROID = "and";
   private static final String PLATFORM_MOBILE_WEB = "mob_web";
   private static final String APPIUM_URL = "http://127.0.0.1:4723/wd/hub";
 

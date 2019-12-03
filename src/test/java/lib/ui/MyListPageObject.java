@@ -55,7 +55,7 @@ abstract public class MyListPageObject extends MainPageObject {
 
   public void waitForArticleToDisappearByTitle(String articleTitle) {
     String articleXpath = getArticleTitleByXpath(articleTitle);
-    this.waitForElementNotPresent(articleXpath, "Saved article still disappeared by title " + articleTitle, 15
+    this.waitForElementNotPresent(articleXpath, "Saved article still appeared by title " + articleTitle, 15
     );
   }
 

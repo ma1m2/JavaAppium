@@ -31,7 +31,7 @@ public class MyListsTests extends CoreTestCase {
     } else {
       articlePageObject.addArticleToMySaved();
     }
-    if(Platform.getInstance().isMW()){
+    if (Platform.getInstance().isMW()) {
       AuthorizationPageObject auth = new AuthorizationPageObject(driver);
       auth.clickAuthButton();
       auth.enterLoginData(LOGIN, PASSWORD);
@@ -58,8 +58,8 @@ public class MyListsTests extends CoreTestCase {
     System.out.println("Well done! The testSaveArticleToMyList has been passed successfully!");
   }
 
-  @Test//6_lesson_HW_Ex11
-  public void testSaveTwoArticleIntoOneFolder(){
+  @Test//6_lesson_HW_Ex11_corrected
+  public void testSaveTwoArticleIntoOneFolder() {
     SearchPageObject searchPageObject = SearchPageObjectFactory.get(driver);
     searchPageObject.initSearchInput();
     searchPageObject.typeSearchLine("Java");
@@ -84,9 +84,8 @@ public class MyListsTests extends CoreTestCase {
     } else {
       searchPageObject.repeatedSearchInput();
     }
-    searchPageObject.clickArticleBySubstring("Java (software platform)");
+    searchPageObject.clickArticleBySubstring("Island of Indonesia");//Island of Indonesia
     articlePageObject.waitForTitleSecondArticle();
-    String articleTitle2 = "Java (software platform)";
     if (Platform.getInstance().isAndroid()) {
       articlePageObject.addSecondArticleToMyList();
       myListPageObject.clickFolderByName(NAME_OF_FOLDER);
@@ -103,14 +102,32 @@ public class MyListsTests extends CoreTestCase {
     }
 
     //2.Delete the first article     //Java (programming language)
-    myListPageObject.removeOverlay();
+    if (Platform.getInstance().isIOS()) {
+      myListPageObject.removeOverlay();
+    }
     myListPageObject.swipeArticleToDelete(articleTitle1);
 
     //3.To be sure that the second article is present 4.Go into it
-    myListPageObject.openSecondArticle(articleTitle2);
-    //4.Be sure that the title is matched
-    assertEquals("We see unexpected title", "Java (software platform)", articleTitle2);
+    myListPageObject.openSecondArticle("Java");
+    //4.Be sure that we have a special link inside an article
+    articlePageObject.waitElementInsideArticle();
 
     System.out.println("Well done! The testSaveTwoArticleIntoOneFolder has been passed successfully!");
   }
+
+
+  @Test//Check link Indonesian
+  public void testSaveIndonesiaToMyList() {
+    SearchPageObject searchPageObject = SearchPageObjectFactory.get(driver);
+
+    searchPageObject.initSearchInput();
+    searchPageObject.typeSearchLine("Java");
+    searchPageObject.clickArticleBySubstring("Island of Indonesia");
+
+    ArticlePageObject articlePageObject = ArticlePageObjectFactory.get(driver);
+    articlePageObject.waitElementInsideArticle();
+
+    System.out.println("Well done! The testSaveIndonesiaToMyList has been passed successfully!");
+  }
 }
+

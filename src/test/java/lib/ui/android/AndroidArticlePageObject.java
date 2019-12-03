@@ -7,7 +7,8 @@ import org.openqa.selenium.remote.RemoteWebDriver;
 public class AndroidArticlePageObject extends ArticlePageObject {
   static {
     TITLE = "id:org.wikipedia:id/view_page_title_text";
-    TITLE_2 = "id:org.wikipedia:id/view_page_title_text";
+    TITLE_2 = "id:org.wikipedia:id/view_page_title_text";//Etymology
+    LINK_INSTEAD_OF_TITLE_2 = "id:Etymology";//xpath://*[@content-desc='Indonesian Indonesian language']
     FOOTER_ELEMENT = "xpath://*[@text='View page in browser']";
     OPTION_BUTTON = "xpath://android.widget.ImageView[@content-desc='More options']";
     OPTION_ADD_TO_MY_LIST_BUTTON = "xpath://*[@text='Add to reading list']";
