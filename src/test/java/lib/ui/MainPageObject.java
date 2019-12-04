@@ -37,20 +37,25 @@ public class MainPageObject {
 
   public WebElement waitForElementAndClick(String locator, String errorMessage, long timeoutInSecond) {
     WebElement element = waitForElementPresent(locator, errorMessage, timeoutInSecond);
+    try{ Thread.sleep(2000); } catch(Exception e) {}
     element.click();
     return element;
   }
 
   public WebElement waitForElementAndSendKey(String locator, String value, String errorMessage, long timeoutInSecond) {
     WebElement element = waitForElementPresent(locator, errorMessage, timeoutInSecond);
+    try{ Thread.sleep(2000); } catch(Exception e) {}
     element.sendKeys(value);
     return element;
   }
 
   public boolean waitForElementNotPresent(String locator, String errorMessage, long timeoutInSeconds) {
     By by = this.getLocatorByString(locator);
+    try{ Thread.sleep(2000); } catch(Exception e) {}
     WebDriverWait wait = new WebDriverWait(driver, timeoutInSeconds);
+    try{ Thread.sleep(2000); } catch(Exception e) {}
     wait.withMessage(errorMessage + "\n");
+    try{ Thread.sleep(2000); } catch(Exception e) {}
     return wait.until(
             ExpectedConditions.invisibilityOfElementLocated(by)
     );

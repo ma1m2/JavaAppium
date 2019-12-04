@@ -100,7 +100,7 @@ public class MyListsTests extends CoreTestCase {
       searchPageObject.initSearchInput();
       searchPageObject.typeSearchLine(SEARCH_LINE);
     }
-    searchPageObject.clickArticleBySubstring("Island of Indonesia");//Island of Indonesia
+    searchPageObject.clickArticleBySubstring("sland of Indonesia");//Island of Indonesia
     articlePageObject.waitForTitleSecondArticle();//because on iOS TITLE differs TITLE_2
     if (Platform.getInstance().isAndroid()) {
       articlePageObject.addSecondArticleToMyList();

@@ -88,6 +88,7 @@ abstract public class ArticlePageObject extends MainPageObject {
   public void addArticleToMySaved() {
     if (Platform.getInstance().isMW()) {
       this.removeArtcleFromSavedIfItAdded();
+      //try{ Thread.sleep(2000); } catch(Exception e) {}
     }
     this.waitForElementAndClick(OPTION_ADD_TO_MY_LIST_BUTTON, "Cannot find option to add article to reading list", 5);
   }

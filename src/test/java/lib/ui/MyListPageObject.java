@@ -69,6 +69,7 @@ abstract public class MyListPageObject extends MainPageObject {
       );
     }else {
       String removeLocator = getRemoveButtonByTitle(articleTitle);
+      try{ Thread.sleep(2000); } catch(Exception e) {}
       this.waitForElementAndClick(removeLocator,"Cannot click button to remove article",10);
     }
     if(Platform.getInstance().isIOS()){

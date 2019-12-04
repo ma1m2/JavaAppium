@@ -15,8 +15,7 @@ public class AuthorizationPageObject extends MainPageObject {
     super(driver);
   }
 
-  public void clickAuthButton() throws InterruptedException {
-    Thread.sleep(2000);
+  public void clickAuthButton() {
     this.waitForElementPresent(LOGIN_BUTTON,"Cannot find Auth button!", 5);
     this.waitForElementAndClick(LOGIN_BUTTON,"Cannot find and Login_Button!", 5);
   }
