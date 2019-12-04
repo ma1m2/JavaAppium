@@ -9,8 +9,8 @@ public class MWArticlePageObject extends ArticlePageObject {
     TITLE_2 = "css:#content h1";//Java
     LINK_INSTEAD_OF_TITLE_2 = "css:#mf-section-0 > p:nth-child(2) > a:nth-child(2)";
     FOOTER_ELEMENT = "css:footer";
-    OPTION_REMOVE_FROM_MY_LIST_BUTTON = "xpath://a[contains(text(),'Unwatch')]";//#page-actions li#ca-watch.mw-ui-icon-mf-watched watched button
-    OPTION_ADD_TO_MY_LIST_BUTTON = "xpath://a[contains(text(),'Watch')]";//"css:#page-actions li#ca-watch.mw-ui-icon-mf-watch button
+    OPTION_REMOVE_FROM_MY_LIST_BUTTON = "xpath://a[contains(text(),'Unwatch')]/..";//#page-actions li#ca-watch.mw-ui-icon-mf-watched watched button
+    OPTION_ADD_TO_MY_LIST_BUTTON = "xpath://a[contains(text(),'Watch')]/..";//"css:#page-actions li#ca-watch.mw-ui-icon-mf-watch button
   }
 
   //OPTION_ADD_TO_MY_LIST_BUTTON = "css:#page-actions li#ca-watch.mw-ui-icon-mf-watch a";

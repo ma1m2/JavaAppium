@@ -15,8 +15,8 @@ public class MyListsTests extends CoreTestCase {
   private static final String LOGIN = "Sveta 2607";
   private static final String PASSWORD = "W1234asdf#";
 
-  @Test//3_03; 4_06
-  public void testSaveArticleToMyList() {
+  @Test//3_03; 4_06; 8_07;
+  public void testSaveArticleToMyList() throws InterruptedException {
     SearchPageObject searchPageObject = SearchPageObjectFactory.get(driver);
 
     searchPageObject.initSearchInput();
@@ -65,7 +65,7 @@ public class MyListsTests extends CoreTestCase {
   }
 
   @Test//8_lesson_HW_Ex17
-  public void testSaveTwoArticleIntoOneFolder() {
+  public void testSaveTwoArticleIntoOneFolder() throws InterruptedException {
     SearchPageObject searchPageObject = SearchPageObjectFactory.get(driver);
     searchPageObject.initSearchInput();
     searchPageObject.typeSearchLine(SEARCH_LINE);
