@@ -76,6 +76,7 @@ abstract public class MyListPageObject extends MainPageObject {
         this.clickElementToTheRightUpperCorner(articleXpath,"Cannot find Red Bin");
     }
     if(Platform.getInstance().isMW()){
+      try{ Thread.sleep(2000); } catch(Exception e) {}
       driver.navigate().refresh();
     }
     this.waitForArticleToDisappearByTitle(articleTitle);
